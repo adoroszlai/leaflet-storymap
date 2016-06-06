@@ -88,9 +88,9 @@ function initMap() {
           areaBottom = areaTop + $('div#container' + feature.properties['id']).height();
 
           $('div#contents').scroll(function() {
-            if ($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom) {
+            if ($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom && !container.hasClass('inFocus')) {
               $('.image-container').removeClass("inFocus").addClass("outFocus");
-              $('div#container' + feature.properties['id']).addClass("inFocus").removeClass("outFocus");
+              container.addClass("inFocus").removeClass("outFocus");
 
               map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['zoom']);
             }
@@ -100,7 +100,6 @@ function initMap() {
       }
     });
 
-    $('div#container1').addClass("inFocus");
     $('#contents').append("<div class='space-at-the-bottom'><a href='#space-at-the-top'><i class='fa fa-chevron-up'></i></br><small>Top</small></a></div>");
     map.fitBounds(geojson.getBounds());
     geojson.addTo(map);
